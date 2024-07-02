@@ -1,18 +1,19 @@
 @font-face {
   font-family: Atmospheric;
-  src: url(./public/fonts/Atmospheric-rg4aL.ttf);
+  src: url("/re_Imagine_compition_project_1/public/fonts/Atmospheric-rg4aL.ttf");
 }
+
 @font-face {
   font-family: Azonix;
-  src: url("/public/fonts/Azonix.otf");
+  src: url("/re_Imagine_compition_project_1/public/fonts/Azonix.otf");
 }
 @font-face {
   font-family: Doom;
-  src: url("/public/fonts/Doom\ 2016\ Text\ 400.ttf");
+  src: url("/re_Imagine_compition_project_1/public/fonts/Doom\ 2016\ Text\ 400.ttf");
 }
 @font-face {
   font-family: worrior;
-  src: url("/public/fonts/KnightWarrior-w16n8.otf");
+  src: url("/re_Imagine_compition_project_1/public/fonts/KnightWarrior-w16n8.otf");
 }
 * {
   margin: 0;
@@ -54,7 +55,6 @@ html {
   left: 0;
   overflow: hidden;
   z-index: 1;
-  /* display: none; */
 }
 #backgroundVideoOne,
 #backgroundVideoTwo {
@@ -68,73 +68,66 @@ html {
 }
 .welcome_page #backgroundVideoForMobile {
   display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ExtraO {
   display: none;
 }
+
 @media (max-width: 768px) {
+  #backgroundVideoOne,
+  #backgroundVideoTwo {
+    display: none;
+  }
   .welcome_page #backgroundVideoForMobile {
     display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1; /* Place behind everything */
-  }
-  .welcome_page .background_text_animation {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .welcome_page .background_text_animation .lines {
-    margin-top: 14vw;
-  }
-  .welcome_page #backgroundVideo {
-    display: none;
-  }
-  .background_gra {
-    display: none;
   }
   .welcome_page {
-    justify-content: start;
-    margin-top: 4vw;
-  }
-  .text_content {
-    width: 100%;
-    background: linear-gradient(to bottom, black, 70%, transparent);
-    height: 70%;
-  }
-  .text_content .the {
-    font-size: 8vw;
-    padding-top: 4vw;
-    padding-bottom: 9vw;
-  }
-  .text_content .main_text {
-    width: 100%;
-    height: 90%;
-    font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
   }
-  .main_text h1 {
-    font-size: 13vw;
-  }
-  .text_content .small_text {
-    font-size: 8vw;
+  .welcome_page .main_text .robo {
     display: none;
   }
-
+  .welcome_page .text-container {
+    margin-top: 4vw;
+    font-weight: 800;
+  }
+  .welcome_page .text-container p {
+    font-size: 8vw;
+  }
+  .welcome_page .text-container p span {
+    display: block;
+  }
+  .text_content .text-container #dynamic-text {
+    border-radius: 2px;
+  }
+  .text_content .text-container #cursor{
+    display: none;
+  }
+  .welcome_page .text_content .small_text {
+    font-size: 3vw;
+  }
   .ExtraO {
     display: block;
     transform: translateX(8px);
   }
-  .text_content .main_text #robo {
+  .welcome_page .text_content {
+    display: block;
+    height: 65vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-direction: column;
+  }
+  .welcome_page #canvas {
     display: none;
   }
 }
@@ -167,12 +160,13 @@ canvas {
   justify-content: center;
   align-items: center;
   font-size: 7vw;
-  font-family: Azonix;
+  font-family: Azonix, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
 }
 .text_content .main_text .first {
   border-radius: 5px;
   padding: 1vw 1vw;
-  margin-left: 2vw;
+  /* margin-left: 2vw; */
 }
 .text_content .main_text .second {
   border-radius: 5px;
@@ -250,9 +244,21 @@ canvas {
   grid-template-rows: repeat(2, 1fr);
   border-radius: 50%;
   overflow: hidden;
+  animation: roboAnimate ease 3s infinite;
+}
+@keyframes roboAnimate {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
 }
 .section2 {
-  background: linear-gradient(to top, black,55%, rgb(0, 138, 145));
+  background: linear-gradient(to top, black, 55%, rgb(0, 138, 145));
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -284,15 +290,17 @@ canvas {
   font-size: 10vw;
   color: #fff;
 }
-
-.text_content #dynamic-text {
-  background-color: yellow;
+.text_content .text-container #dynamic-text {
+  background: linear-gradient(to right, yellow, red);
   padding: 5px;
   border-radius: 10px;
-  color: #000;
-  border-right: 2px solid #61dafb;
+  color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-right: 1px solid #61dafb;
   white-space: nowrap;
   overflow: hidden;
+  box-shadow: 1px 1px 80px 1px #000;
 }
 
 #cursor {
@@ -315,6 +323,12 @@ canvas {
   color: rgb(47, 205, 233);
 }
 
-.main_text .titleTextEnd {
-  background: linear-gradient(to top, red, 10%, transparent);
+.welcome_page .text_content .main_text .titleTextStart {
+  background: linear-gradient(to right, blue, 30%, transparent);
 }
+
+.main_text .titleTextEnd {
+  background: linear-gradient(to left, red, 30%, transparent);
+  background-position: 40%;
+}
+

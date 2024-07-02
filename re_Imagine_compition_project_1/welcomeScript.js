@@ -134,10 +134,10 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight;
 });
 
-createDots();
-createMeteoroids();
-animate();
 
+
+
+// background moving text animating based on wheel
 const marqueAnimation = () => {
   const marque = document.querySelectorAll(".marque");
   const marque_Right = document.querySelectorAll(".marque_right");
@@ -189,66 +189,79 @@ const marqueAnimation = () => {
   });
 };
 
-marqueAnimation();
-
 // GSAP animation to resize the clip-path circle on scroll
-gsap.to(".section2", {
-  clipPath: "circle(100% at 50% 50%)", // Expand to full screen
-  duration: 2, 
-  ease: "power1.out",
-  scrollTrigger: {
-    trigger: ".welcome_page", 
-    start: "top top", 
-    end: "bottom 60%",
-    scrub: 2, 
-    toggleActions: "play reverse play reverse", 
-  },
-});
-
-gsap.to("#robo", {
-  scale: 11,
-  y: -50,
-  x: 142,
-  opacity:0,
-  sttagger: 0.2,
-  duration: 2,
-  scrollTrigger: {
-    trigger: ".welcome_page",
-    start: "top top%",
-    end: "bottom center",
-    scrub: 2, // Smoothly scrubs the animation based on the scroll position
-  },
-});
-
-
-// for mobile device
-gsap.to(".ExtraO", {
-  scale: 10,
-  opacity: 0,
-  duration: 2,
-  scrollTrigger: {
-    trigger: "welcome_page",
-    start: "top -2%",
-    end: "bottom center",
-    scrub:2
-  }
-})
-
-
-// for looping the video 
-  const video1 = document.getElementById("backgroundVideoOne");
-  const video2 = document.getElementById("backgroundVideoTwo");
-
-  video1.play();
-
-  video1.addEventListener("ended", () => {
-    video1.style.display = "none";
-    video2.style.display = "block";
-    video2.play();
+const launchingAnimation = () => {
+  gsap.to(".section2", {
+    clipPath: "circle(100% at 50% 50%)", // Expand to full screen
+    duration: 2,
+    ease: "power1.out",
+    scrollTrigger: {
+      trigger: ".welcome_page",
+      start: "top top",
+      end: "bottom 60%",
+      scrub: 2,
+      toggleActions: "play reverse play reverse",
+    },
   });
 
-  video2.addEventListener("ended", () => {
-    video2.style.display = "none";
-    video1.style.display = "block";
-    video1.play();
+  gsap.to("#robo", {
+    scale: 11,
+    y: -50,
+    x: 142,
+    opacity: 0,
+    sttagger: 0.2,
+    duration: 2,
+    scrollTrigger: {
+      trigger: ".welcome_page",
+      start: "top top%",
+      end: "bottom center",
+      scrub: 2, // Smoothly scrubs the animation based on the scroll position
+    },
   });
+
+  // for mobile device
+  gsap.to(".ExtraO", {
+    scale: 10,
+    opacity: 0,
+    duration: 2,
+    scrollTrigger: {
+      trigger: "welcome_page",
+      start: "top -2%",
+      end: "bottom center",
+      scrub: 2,
+    },
+  });
+
+}
+
+// for looping the video
+const loopVideoBackgound = () => {
+   const video1 = document.getElementById("backgroundVideoOne");
+   const video2 = document.getElementById("backgroundVideoTwo");
+
+   video1.play();
+
+   video1.addEventListener("ended", () => {
+     video1.style.display = "none";
+     video2.style.display = "block";
+     video2.play();
+   });
+
+   video2.addEventListener("ended", () => {
+     video2.style.display = "none";
+     video1.style.display = "block";
+     video1.play();
+   });
+
+
+}
+
+
+
+
+createDots();
+createMeteoroids();
+animate();
+marqueAnimation();
+launchingAnimation();
+loopVideoBackgound();
